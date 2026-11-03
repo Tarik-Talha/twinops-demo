@@ -1,0 +1,9 @@
+.venv/
+.embroidery_venv/
+**/runtime/
+__pycache__/
+*.py[cod]
+*.log
+*.blend1
+.streamlit/secrets.toml
+.DS_Store
