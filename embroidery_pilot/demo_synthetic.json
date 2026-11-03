@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "mode": "embroidery",
+  "name": "TwinOps · Sentetik nakış pilotu",
+  "data_kind": "synthetic",
+  "source": "Makine envanteri kullanıcı beyanı; siparişler, süreler, hızlar ve kasnak stoğu sentetik demo varsayımıdır.",
+  "shift_start": "09:00",
+  "shift_minutes": 480,
+  "days": 2,
+  "workers": 4,
+  "hoops": 72,
+  "attend_running": false,
+  "machines": [
+    {"id":"M1", "label":"Barudan · 2003", "heads":15, "capabilities":["standard"], "standard_spm":450, "attach_spm":400, "chenille_spm":250, "rate_basis":"scenario_assumption"},
+    {"id":"M2", "label":"Barudan · 2003", "heads":15, "capabilities":["standard"], "standard_spm":450, "attach_spm":400, "chenille_spm":250, "rate_basis":"scenario_assumption"},
+    {"id":"M3", "label":"Barudan · 2015", "heads":18, "capabilities":["standard"], "standard_spm":550, "attach_spm":400, "chenille_spm":250, "rate_basis":"scenario_assumption"},
+    {"id":"M4", "label":"Tajima · yıl/model doğrulanmadı", "heads":18, "capabilities":["chenille"], "standard_spm":450, "attach_spm":400, "chenille_spm":250, "rate_basis":"scenario_assumption"}
+  ],
+  "orders": [
+    {"id":"DEMO_S1", "kind":"standard", "quantity":45, "batch_size":15, "release":0, "due":240, "prep_minutes":12, "change_minutes":5, "stitches":24000, "attach_stitches":4000, "chenille_stitches":8000, "eligible":["M1","M2","M3"]},
+    {"id":"DEMO_C1", "kind":"chenille", "quantity":36, "batch_size":18, "release":0, "due":480, "prep_minutes":12, "change_minutes":5, "stitches":10000, "attach_stitches":5000, "chenille_stitches":20000, "eligible":["M4"]},
+    {"id":"DEMO_S2", "kind":"standard", "quantity":60, "batch_size":15, "release":0, "due":240, "prep_minutes":10, "change_minutes":5, "stitches":15000, "attach_stitches":4000, "chenille_stitches":8000, "eligible":["M1","M2","M3"]},
+    {"id":"DEMO_C2", "kind":"chenille", "quantity":18, "batch_size":18, "release":0, "due":150, "prep_minutes":12, "change_minutes":5, "stitches":10000, "attach_stitches":2000, "chenille_stitches":8000, "eligible":["M4"]},
+    {"id":"DEMO_S3", "kind":"standard", "quantity":36, "batch_size":18, "release":0, "due":120, "prep_minutes":12, "change_minutes":5, "stitches":20000, "attach_stitches":4000, "chenille_stitches":8000, "eligible":["M3"]},
+    {"id":"DEMO_C3", "kind":"chenille", "quantity":36, "batch_size":18, "release":0, "due":440, "prep_minutes":12, "change_minutes":5, "stitches":10000, "attach_stitches":3000, "chenille_stitches":12000, "eligible":["M4"]},
+    {"id":"DEMO_S4", "kind":"standard", "quantity":30, "batch_size":15, "release":70, "due":360, "prep_minutes":10, "change_minutes":5, "stitches":18000, "attach_stitches":4000, "chenille_stitches":8000, "eligible":["M1","M2","M3"]}
+  ],
+  "assumptions": [
+    "Bütün siparişler DEMO_ kimlikli sentetik test verisidir; gerçek müşteri veya ticari sonuç içermez.",
+    "Hızlar kafa başına etkin ilmek/dakika senaryo varsayımıdır; üretici veya saha doğrulaması yoktur.",
+    "Her kafa aynı deseni işler. Makine tek partide en fazla kafa sayısı kadar ürün üretir; kafalar bağımsız makine değildir.",
+    "Sabit parti bölmesi sipariş batch_size alanıyla belirlenir; CP-SAT parti boyunu veya desen birleşimini optimize etmez.",
+    "Hazırlık ve kasnaklama makine üzerinde yapılır, süre kısmi partide de sabittir; boşaltma/kalite kontrol payı bu süreye dahildir.",
+    "Her parti bütün fazları boyunca makineyi ve parça adedi kadar kasnağı tutar; özel kasnak tipi ayrımı yoktur.",
+    "Tajima: hazırlık -> sabitleme nakışı -> mod değişimi -> süzene; fazlar bitişik, başka parti araya girmez.",
+    "Operatörler aynı beceride ortak havuzdur. Hazırlık/mod değişimi bir operatör; çalışma boyunca gözetim ayarı isteğe bağlıdır.",
+    "09:00–17:00 dışında çalışma yok; partiler bölünmez. Mola ve hafta sonu takvimi bilinmiyor; her plan günü 480 dakika varsayılır.",
+    "Arıza, iplik değişimi, fire, taşıma ve desen bağımlı sıra hazırlığı ayrı modellenmedi; hız/hazırlık varsayımları kalibre edilmelidir.",
+    "Termin gecikmesi duvar saati dakikasıdır; günler arası gece beklemesini içerir. Plan ufku içindeki bütün siparişler tamamlanır.",
+    "Yerleşim kavramsaldır; ölçülmüş fabrika geometrisi değildir. Ekonomik fayda hesaplanmaz; gerçek fiyat/maliyet/satış bilgisi yoktur."
+  ]
+}
